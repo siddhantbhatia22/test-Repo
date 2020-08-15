@@ -1,0 +1,25 @@
+<template>
+    <!--This is a parent component-->
+    <lightning-card title="Meeting Rooms">
+    <ul>
+    <!-- has used the parent controller, for item for latest values-->    
+    <template for:each={meetingRoomsInfo} for:item=room>
+    <li key={room.roomName} style="padding:10px">
+     <!--Child component property also kebab camel Case used, Boolean property-->
+       <!-- <c-meeting-room meeting-room-info={room} show-room-info></c-meeting-room>-->
+       <c-meeting-room  show-room-info>
+         <!--here slot is used as attribute to supply the value-->
+     <lightning-tile label={room.roomName} slot="roomInfo">     
+                  <p class="slds-truncate" title="room.roomCapacity">
+                      Room Capacity={room.roomCapacity}</p>
+                    </lightning-tile> 
+        <div>Additional Markup will go in unnamed slot</div>  
+
+       </c-meeting-room>
+
+        
+        </li>
+        </template>
+    </ul>
+    </lightning-card>
+    </template>

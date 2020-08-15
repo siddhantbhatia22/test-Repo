@@ -1,0 +1,20 @@
+<template>
+    <lightning-card title="Conditional Rendering">
+     <lightning-input type="checkbox" label="Show Info" onchange={showInfoHandler}> </lightning-input>
+    <template if:true={displayInfo}>
+     <template for:each={colours} for:item="colour">
+         <p key={colourd}>{colour}</p>
+     </template>
+
+    <div>I am here  </div> 
+</template>
+<template if:false={displayInfo}>
+        <div>By default false</div>
+        <template iterator:it={newcolours}>
+            <p key={it.value}>{it.value}</p>
+        </template>
+        
+    
+    </template>
+</lightning-card>
+</template>

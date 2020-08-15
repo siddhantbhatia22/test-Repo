@@ -1,0 +1,35 @@
+<apex:page controller="BulkDeleteSObjects2_Controller">
+<apex:sectionHeader title="Bulk Delete" subtitle="SObjects"/>
+
+    <apex:form >
+        <apex:pageBlock id="theBlock">
+            <apex:pageBlockButtons location="both">
+                <apex:commandButton value="Delete Selected" action="{!deleteSelected}" onclick="if (!confirm('Are you sure?')) return false;"/>
+            </apex:pageBlockButtons>
+            
+            <apex:pageMessages />
+
+            <apex:pageBlockSection columns="1">
+                <apex:selectList size="1" value="{!selectedSObject}" id="objects">
+                    <apex:selectOptions value="{!sObjectList}"/>
+                    <apex:actionSupport event="onchange" action="{!executeSelect}" rerender="theBlock"/>
+                </apex:selectList>
+                <apex:pageBlockTable value="{!sObjectWrapperList}" var="item" id="records">
+                    <apex:column style="width:20px;">
+                        <apex:facet name="header">
+                            <apex:outputText value="Delete"/>
+                        </apex:facet>
+                        <apex:inputCheckbox value="{!item.deleteThis}"/>
+                    </apex:column>
+                    <apex:column >
+                        <apex:facet name="header">
+                            <apex:outputText value="Name/Id"/>
+                        </apex:facet>
+                        <apex:outputText value="{!item.name}" rendered="{!hasName == true}"/>
+                        <apex:outputText value="{!item.sObj.Id}" rendered="{!hasName == false}"/>
+                    </apex:column>
+                </apex:pageBlockTable>
+            </apex:pageBlockSection>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

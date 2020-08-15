@@ -1,0 +1,15 @@
+<template>
+    <lightning-card title="Submit Your Information">
+        <lightning-layout multiple-rows>
+            <lightning-layout-item size="12" padding="around-medium">
+                <lightning-input type="text" name="enterFirstName" label="Enter First Name" onchange={changeHandler}></lightning-input>
+                </lightning-layout-item>
+                <lightning-layout-item size="12" padding="around-medium">
+                <lightning-input type="text" name="enterLastName" label="Enter Last Name" onchange={changeHandler}></lightning-input>
+                </lightning-layout-item>
+                      <lightning-layout-item size="12" padding="around-medium">
+                <lightning-button label="Submit" variant="brand" onclick={handleClick}></lightning-button>
+            </lightning-layout-item>
+         </lightning-layout>
+         </lightning-card>
+  </template>

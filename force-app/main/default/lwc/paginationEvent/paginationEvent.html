@@ -1,0 +1,22 @@
+<!--
+  @File Name          : paginationEvent.html
+  @Description        : 
+  @Author             : ChangeMeIn@UserSettingsUnder.SFDoc
+  @Group              : 
+  @Last Modified By   : ChangeMeIn@UserSettingsUnder.SFDoc
+  @Last Modified On   : 9/30/2019, 2:06:01 PM
+  @Modification Log   : 
+  Ver       Date            Author      		    Modification
+  1.0    9/30/2019   ChangeMeIn@UserSettingsUnder.SFDoc     Initial Version
+-->
+<template>
+    <lightning-layout>
+        <lightning-layout-item>
+            <lightning-button label="Previous" icon-name="utility:chevronleft" onclick={previousHandler}></lightning-button>
+        </lightning-layout-item>
+        <lightning-layout-item flexibility="grow"></lightning-layout-item>
+        <lightning-layout-item>
+            <lightning-button label="Next" icon-name="utility:chevronright" icon-position="right" onclick={nextHandler}></lightning-button>
+        </lightning-layout-item>
+    </lightning-layout>
+</template>

@@ -1,0 +1,123 @@
+<apex:page controller="timesheetmanagement" tabStyle="Timesheet__c" sidebar="false" action="{!onloadfunction}">
+<apex:form >
+     <apex:pageBlock title="Timesheet Management">
+     
+         Select&nbsp;&nbsp;&nbsp;Week&nbsp;&nbsp;
+          <apex:selectList value="{!weekselection}" size="1" id="weekselect">
+              <apex:actionSupport event="onchange" action="{!onloadfunction}" reRender="AllTables" />
+              <apex:selectOptions value="{!weekvalues}"/>
+          </apex:selectList>
+    <!-- <apex:selectList value="{!incselection}" size="1" id="incselect">
+                                  <apex:selectOptions value="{!incvalues}"/>
+                              </apex:selectList> -->      
+          
+
+          <br/> <br/> <br/> <br/>
+          
+
+          <apex:outputPanel id="AllTables"> 
+            <apex:tabPanel switchType="client" selectedTab="inceffort" id="theTabPanel">
+                <apex:tab label="Incident Effort" name="inceffort" id="tabOne">
+                <apex:outputPanel id="entrytable">
+                <apex:pagemessages />
+                <apex:variable value="{!0}" var="rowNum"/>
+                     <apex:dataTable cellspacing="5" value="{!entrylist}" var="entry" rendered="{!NOT(ISNULL(entrylist))}">
+                         <apex:variable var="rowNum" value="{!rowNum + 1}"/> 
+                         <apex:column headervalue="Incident #">                                                                        
+                             <apex:inputfield value="{!entry.Incident__c}" style="width:100px;" required="true" rendered="{!entry.Displayfields__c == FALSE}"/>
+                             <apex:outputfield value="{!entry.Incident__c}" style="width:100px;" rendered="{!entry.Displayfields__c == TRUE}"/>                                                         
+                         </apex:column>
+                         <apex:column headervalue="Task">
+                             <apex:inputfield value="{!entry.Tasks_for_Incident__c}" required="true" rendered="{!entry.Displayfields__c == FALSE}"/>
+                             <apex:outputfield value="{!entry.Tasks_for_Incident__c}" rendered="{!entry.Displayfields__c == TRUE}"/>
+                         </apex:column> 
+                         <apex:column headervalue="Mon">
+                             <apex:inputfield value="{!entry.Mon__c}" style="width:50px;"/>
+                         </apex:column>
+                         <apex:column headervalue="Tue">
+                             <apex:inputfield value="{!entry.Tue__c}" style="width:50px;"/>
+                         </apex:column> 
+                         
+                         <apex:column headervalue="Wed">
+                             <apex:inputfield value="{!entry.Wed__c}" style="width:50px;"/>
+                         </apex:column> 
+                         <apex:column headervalue="Thu">
+                             <apex:inputfield value="{!entry.Thu__c}" style="width:50px;"/>
+                         </apex:column> 
+                         <apex:column headervalue="Fri">
+                             <apex:inputfield value="{!entry.Fri__c}" style="width:50px;"/>
+                         </apex:column> 
+                         <apex:column style="background-color:red;" headervalue="Sat">
+                             <apex:inputfield value="{!entry.Sat__c}" style="width:50px;"/>
+                         </apex:column> 
+                         <apex:column style="background-color:red;" headervalue="Sun">
+                             <apex:inputfield value="{!entry.Sun__c}" style="width:50px;"/>
+                         </apex:column>  
+                         <apex:column headervalue="Delete">
+                             <apex:commandlink action="{!deltsheet}" immediate="true"> <apex:param name="tentryid" value="{!entry.Id}"/> <apex:param name="rownumber" value="{!rowNum}"/><apex:commandbutton value="Delete" /> </apex:commandlink>
+                         </apex:column>     
+                     </apex:dataTable>
+                     </apex:outputPanel>
+                     <br/> <br/>
+                    <apex:commandbutton value="Save Timesheet" action="{!savetimesheet}" />
+                    <apex:commandbutton value="Cancel" immediate="true" action="{!canceltimesheet}" /> 
+                    <apex:commandbutton value="Add another row" action="{!addrow}"/>
+                        
+                     
+                </apex:tab>
+                <apex:tab label="Other Effort" name="othereffort" id="tabTwo">   
+                <apex:outputPanel id="otherentrytable">
+                <apex:pagemessages />
+                <apex:dataTable cellspacing="5" value="{!otherentrylist}" var="otherentry" rendered="{!NOT(ISNULL(otherentrylist))}">
+                         <apex:column headervalue="Task">
+                             <apex:inputfield value="{!otherentry.Tasks_Other__c}" required="true" rendered="{!otherentry.Displayfields__c == FALSE}"/>
+                             <apex:outputfield value="{!otherentry.Tasks_Other__c}" rendered="{!otherentry.Displayfields__c == TRUE}"/>
+                         </apex:column> 
+                         <apex:column headervalue="Comments">
+                             <apex:inputfield value="{!otherentry.Comments__c}" rendered="{!otherentry.Displayfields__c == FALSE}" />
+                             <apex:outputfield value="{!otherentry.Comments__c}" rendered="{!otherentry.Displayfields__c == TRUE}"/>
+                         </apex:column>
+                         <apex:column headervalue="Mon">
+                             <apex:inputfield value="{!otherentry.Mon__c}" style="width:50px;"/>
+                         </apex:column>
+                         <apex:column headervalue="Tue">
+                             <apex:inputfield value="{!otherentry.Tue__c}" style="width:50px;"/>
+                         </apex:column> 
+                         
+                         <apex:column headervalue="Wed">
+                             <apex:inputfield value="{!otherentry.Wed__c}" style="width:50px;"/>
+                         </apex:column> 
+                         <apex:column headervalue="Thu">
+                             <apex:inputfield value="{!otherentry.Thu__c}" style="width:50px;"/>
+                         </apex:column> 
+                         <apex:column headervalue="Fri">
+                             <apex:inputfield value="{!otherentry.Fri__c}" style="width:50px;"/>
+                         </apex:column> 
+                         <apex:column style="background-color:red;" headervalue="Sat">
+                             <apex:inputfield value="{!otherentry.Sat__c}" style="width:50px;"/>
+                         </apex:column> 
+                         <apex:column style="background-color:red;" headervalue="Sun">
+                             <apex:inputfield value="{!otherentry.Sun__c}" style="width:50px;"/>
+                         </apex:column>  
+                         <apex:column headervalue="Delete">
+                             <apex:commandbutton value="Delete"/>
+                         </apex:column>      
+                     </apex:dataTable>
+                     </apex:outputpanel>
+                     <br/> <br/>
+                    <apex:commandbutton value="Save Timesheet" action="{!savetimesheet}">
+                        
+                    </apex:commandbutton>
+                    <apex:commandbutton value="Cancel" immediate="true" action="{!canceltimesheet}" /> 
+                    <apex:commandbutton value="Add another row" action="{!addrowothers}">
+                        
+                    </apex:commandbutton>               
+                </apex:tab>
+            </apex:tabPanel>
+
+          </apex:outputPanel>
+            
+          
+     </apex:pageBlock>
+</apex:form>        
+</apex:page>

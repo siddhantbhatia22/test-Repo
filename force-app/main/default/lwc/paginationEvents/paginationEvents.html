@@ -1,0 +1,33 @@
+<!--
+  @File Name          : paginationEvents.html
+  @Description        : 
+  @Author             : ChangeMeIn@UserSettingsUnder.SFDoc
+  @Group              : 
+  @Last Modified By   : ChangeMeIn@UserSettingsUnder.SFDoc
+  @Last Modified On   : 10/4/2019, 1:30:32 PM
+  @Modification Log   : 
+  Ver       Date            Author      		    Modification
+  1.0    9/30/2019   ChangeMeIn@UserSettingsUnder.SFDoc     Initial Version
+-->
+<template>
+    <lightning-card title="List of Accounts" icon-name="custom:custom9">
+        <div class="slds-m-around_medium">
+            <p class="slds-p-horizontal_medium">Display records in paginated way </p>
+            <br></br>
+            <div style="height: 180px;">
+                <lightning-datatable 
+                    key-field="id"
+                    data={data}
+                    columns={columns}>
+                </lightning-datatable>
+            </div>
+        </div>
+        <div class="slds-m-around_medium">
+            <p class="slds-m-vertical_medium content">
+                     Displaying {startingRecord} to {endingRecord} of {totalRecountCount} records.
+                     Page {page} of {totalPage}. </p>
+            
+                     <c-pagination-event onprevious={previousHandler} onnext={nextHandler}> </c-pagination-event>  
+        </div>
+    </lightning-card>
+</template>

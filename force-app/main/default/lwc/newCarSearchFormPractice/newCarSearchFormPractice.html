@@ -1,0 +1,34 @@
+<!--
+  @File Name          : newCarSearchFormPractice.html
+  @Description        : 
+  @Author             : ChangeMeIn@UserSettingsUnder.SFDoc
+  @Group              : 
+  @Last Modified By   : ChangeMeIn@UserSettingsUnder.SFDoc
+  @Last Modified On   : 11/6/2019, 11:00:16 AM
+  @Modification Log   : 
+  Ver       Date            Author      		    Modification
+  1.0    11/6/2019   ChangeMeIn@UserSettingsUnder.SFDoc     Initial Version
+-->
+<template>
+    <lightning-card title = "Rant a Car Application">
+            <lightning-layout horizontal-align="center">
+                    <lightning-layout-item padding="horizontal-small">
+            <lightning-combobox
+            name="carTypes"
+            label="Car Types"
+            value={selectedValue}
+            placeholder="All Types"
+            options={carTypes}
+            variant="label-hidden" 
+            onchange={handleCarTypeChange} ></lightning-combobox>
+        </lightning-layout-item>
+        
+        <lightning-layout-item padding="horizontal-small">
+       
+            <lightning-button labe="New" onclick={createNewCarType}></lightning-button>
+    </lightning-layout-item>
+    
+            </lightning-layout>
+    </lightning-card>
+    
+</template>
